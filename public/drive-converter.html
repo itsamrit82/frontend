@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Drive Link Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        input[type="text"]:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            border-left: 4px solid #28a745;
+        }
+        .error {
+            background-color: #f8d7da;
+            border-left-color: #dc3545;
+            color: #721c24;
+        }
+        .copy-btn {
+            background-color: #28a745;
+            margin-top: 10px;
+            padding: 8px 16px;
+            font-size: 14px;
+        }
+        .copy-btn:hover {
+            background-color: #218838;
+        }
+        .instructions {
+            background-color: #e7f3ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border-left: 4px solid #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Google Drive Link Converter</h1>
+        
+        <div class="instructions">
+            <strong>How to use:</strong>
+            <ol>
+                <li>Upload your image to Google Drive</li>
+                <li>Right-click the image and select "Get link"</li>
+                <li>Make sure it's set to "Anyone with the link can view"</li>
+                <li>Copy the sharing link and paste it below</li>
+                <li>Click "Convert" to get the direct image URL</li>
+            </ol>
+        </div>
+
+        <div class="form-group">
+            <label for="driveLink">Google Drive Sharing Link:</label>
+            <input type="text" id="driveLink" placeholder="https://drive.google.com/file/d/YOUR_FILE_ID/view?usp=sharing">
+        </div>
+
+        <button onclick="convertLink()">Convert to Direct Link</button>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function convertLink() {
+            const input = document.getElementById('driveLink').value.trim();
+            const resultDiv = document.getElementById('result');
+            
+            if (!input) {
+                showError('Please enter a Google Drive link');
+                return;
+            }
+
+            // Extract file ID from various Google Drive URL formats
+            let fileId = null;
+            
+            // Format 1: https://drive.google.com/file/d/FILE_ID/view?usp=sharing
+            let match = input.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+            if (match) {
+                fileId = match[1];
+            }
+            
+            // Format 2: https://drive.google.com/open?id=FILE_ID
+            if (!fileId) {
+                match = input.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+                if (match) {
+                    fileId = match[1];
+                }
+            }
+
+            if (!fileId) {
+                showError('Invalid Google Drive link. Please make sure you copied the correct sharing link.');
+                return;
+            }
+
+            const directLink = `https://drive.google.com/uc?export=view&id=${fileId}`;
+            
+            resultDiv.innerHTML = `
+                <div class="result">
+                    <strong>Direct Image URL:</strong><br>
+                    <input type="text" value="${directLink}" readonly style="margin-top: 10px;">
+                    <button class="copy-btn" onclick="copyToClipboard('${directLink}')">Copy Link</button>
+                    <p style="margin-top: 10px; font-size: 14px; color: #666;">
+                        Use this URL in your product forms for images.
+                    </p>
+                </div>
+            `;
+        }
+
+        function showError(message) {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `
+                <div class="result error">
+                    <strong>Error:</strong> ${message}
+                </div>
+            `;
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(function() {
+                alert('Link copied to clipboard!');
+            }, function(err) {
+                console.error('Could not copy text: ', err);
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                alert('Link copied to clipboard!');
+            });
+        }
+
+        // Allow Enter key to convert
+        document.getElementById('driveLink').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                convertLink();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+/* index.css - Mobile First Design */
+body {
+  margin: 0;
+  font-family: 'Playfair Display', serif;
+  background-color: #fdf4ef; /* elegant off-white */
+  color: #1a1a1a;
+  transition: all 0.3s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Playfair Display', serif;
+  color: #1a1a1a;
+  font-weight: 600;
+}
+
+button {
+  background-color: #f7cfdc; /* soft girlish pink */
+  color: #1a1a1a;
+  border: none;
+  padding: 0.6rem 1.4rem;
+  border-radius: 14px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+  font-family: 'Playfair Display', serif;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+
+button:hover {
+  background-color: #f0cdd4;
+  transform: translateY(-2px);
+}
+
+a {
+  color: #a3476b;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #fdf4ef;
+}
+
+.main-content {
+  flex: 1;
+  padding: 1rem;
+  animation: fadeIn 0.5s ease-in;
+}
+
+@media (min-width: 768px) {
+  .main-content {
+    padding: 2rem;
+  }
+}
+
+header, footer {
+  background-color: #fff0f3; /* soft header from logo background */
+  border-bottom: 1px solid #f1dede;
+  padding: 0.75rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Playfair Display', serif;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+@media (min-width: 768px) {
+  header, footer {
+    padding: 1rem 2rem;
+  }
+}
+
+footer {
+  border-top: 1px solid #f1dede;
+  font-size: 0.85rem;
+  text-align: center;
+  color: #555;
+}
+
+.logo {
+  height: 48px;
+}
+
+.nav-links a {
+  margin-left: 1.2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  display: block;
+  height: 2px;
+  width: 0;
+  background: #c0396f;
+  transition: width 0.3s ease;
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

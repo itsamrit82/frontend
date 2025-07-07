@@ -1,0 +1,95 @@
+.add-product-page {
+  padding: 32px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.add-product-page h2 {
+  font-size: 28px;
+  color: #2a2a3a;
+  margin-bottom: 24px;
+  font-family: 'Playfair Display', serif;
+}
+
+.add-product-form {
+  background: white;
+  padding: 32px;
+  max-width: 900px;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: fadeIn 0.4s ease;
+}
+
+.form-row {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 220px;
+}
+
+.form-group.full-width {
+  width: 100%;
+}
+
+label {
+  font-size: 14px;
+  margin-bottom: 6px;
+  color: #444;
+  font-weight: 500;
+}
+
+input, textarea {
+  padding: 12px 14px;
+  font-size: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fafafa;
+  font-family: 'Poppins', sans-serif;
+  transition: border-color 0.3s ease;
+}
+
+input:focus, textarea:focus {
+  border-color: #a3476b;
+  outline: none;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+button[type="submit"] {
+  margin-top: 12px;
+  padding: 12px 24px;
+  font-size: 15px;
+  background: #a3476b;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: background 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background: #913d5f;
+}
+
+.status-msg {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #444;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

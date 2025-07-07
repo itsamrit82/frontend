@@ -1,0 +1,70 @@
+.dashboard-page {
+  padding: 32px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.dashboard-page h2 {
+  font-size: 28px;
+  margin-bottom: 24px;
+  font-family: 'Playfair Display', serif;
+}
+
+.dashboard-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.dashboard-card {
+  background: white;
+  padding: 20px;
+  flex: 1 1 200px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-3px);
+}
+
+.card-icon {
+  font-size: 28px;
+}
+
+.card-label {
+  font-size: 14px;
+  color: #555;
+}
+
+.card-value {
+  font-size: 22px;
+  font-weight: bold;
+  color: #1e1e2e;
+}
+
+.user-list {
+  margin-top: 32px;
+  background: #fff;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.user-list h4 {
+  margin-bottom: 16px;
+}
+
+.user-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.user-list li {
+  padding: 6px 0;
+  border-bottom: 1px solid #eee;
+}

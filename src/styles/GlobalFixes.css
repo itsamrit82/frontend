@@ -1,0 +1,77 @@
+/* Global Input and Text Color Fixes - Exclude Admin Pages */
+
+/* Fix all input fields to have proper colors - Not for admin pages */
+body:not(.admin-page) input[type="text"],
+body:not(.admin-page) input[type="email"],
+body:not(.admin-page) input[type="password"],
+body:not(.admin-page) input[type="search"],
+body:not(.admin-page) input[type="tel"],
+body:not(.admin-page) input[type="url"],
+body:not(.admin-page) input[type="number"],
+body:not(.admin-page) textarea,
+body:not(.admin-page) select {
+  background-color: white !important;
+  color: #111827 !important;
+  border: 1px solid #d1d5db;
+}
+
+body:not(.admin-page) input[type="text"]:focus,
+body:not(.admin-page) input[type="email"]:focus,
+body:not(.admin-page) input[type="password"]:focus,
+body:not(.admin-page) input[type="search"]:focus,
+body:not(.admin-page) input[type="tel"]:focus,
+body:not(.admin-page) input[type="url"]:focus,
+body:not(.admin-page) input[type="number"]:focus,
+body:not(.admin-page) textarea:focus,
+body:not(.admin-page) select:focus {
+  background-color: white !important;
+  color: #111827 !important;
+  border-color: #f1005d;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(241, 0, 93, 0.1);
+}
+
+/* Fix placeholder colors - Not for admin pages */
+body:not(.admin-page) input::placeholder,
+body:not(.admin-page) textarea::placeholder {
+  color: #6b7280 !important;
+  opacity: 1;
+}
+
+
+
+
+
+
+
+/* Fix form elements specifically - Not for admin pages */
+body:not(.admin-page) .form-control,
+body:not(.admin-page) .form-input,
+body:not(.admin-page) .input-field {
+  background-color: white !important;
+  color: #111827 !important;
+  border: 1px solid #d1d5db;
+}
+
+body:not(.admin-page) .form-control:focus,
+body:not(.admin-page) .form-input:focus,
+body:not(.admin-page) .input-field:focus {
+  background-color: white !important;
+  color: #111827 !important;
+  border-color: #f1005d;
+  box-shadow: 0 0 0 2px rgba(241, 0, 93, 0.1);
+}
+
+/* Mobile specific fixes - Not for admin pages */
+@media (max-width: 768px) {
+  body:not(.admin-page) input[type="text"],
+  body:not(.admin-page) input[type="email"],
+  body:not(.admin-page) input[type="password"],
+  body:not(.admin-page) input[type="search"],
+  body:not(.admin-page) textarea,
+  body:not(.admin-page) select {
+    font-size: 16px; /* Prevents zoom on iOS */
+    background-color: white !important;
+    color: #111827 !important;
+  }
+}

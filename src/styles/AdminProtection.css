@@ -1,0 +1,114 @@
+/* Admin Page Protection - Preserve Original Styling */
+
+/* Reset any global changes for admin pages */
+.admin-page * {
+  box-sizing: content-box !important;
+}
+
+.admin-page input,
+.admin-page textarea,
+.admin-page select,
+.admin-page button {
+  all: revert !important;
+  box-sizing: border-box !important;
+}
+
+/* Ensure admin pages are not affected by mobile optimizations */
+.admin-page {
+  overflow-x: auto !important;
+  max-width: none !important;
+}
+
+/* Preserve admin layout integrity */
+.admin-page .admin-layout,
+.admin-page .admin-main,
+.admin-page .admin-sidebar,
+.admin-page .admin-content {
+  position: static !important;
+  transform: none !important;
+  width: auto !important;
+  max-width: none !important;
+  overflow: visible !important;
+}
+
+/* Ensure admin forms work properly */
+.admin-page form {
+  display: block !important;
+  width: auto !important;
+  max-width: none !important;
+}
+
+.admin-page .form-group,
+.admin-page .form-control,
+.admin-page .input-group {
+  display: block !important;
+  width: auto !important;
+  margin: initial !important;
+  padding: initial !important;
+}
+
+/* Reset any typography changes for admin */
+.admin-page h1,
+.admin-page h2,
+.admin-page h3,
+.admin-page h4,
+.admin-page h5,
+.admin-page h6,
+.admin-page p,
+.admin-page span,
+.admin-page div,
+.admin-page label {
+  font-size: initial !important;
+  line-height: initial !important;
+  color: initial !important;
+  margin: initial !important;
+  padding: initial !important;
+}
+
+/* Ensure admin tables work properly */
+.admin-page table,
+.admin-page th,
+.admin-page td {
+  display: table !important;
+  width: auto !important;
+  max-width: none !important;
+  overflow: visible !important;
+}
+
+/* Reset any button styling for admin */
+.admin-page button,
+.admin-page .btn {
+  all: revert !important;
+  display: inline-block !important;
+  width: auto !important;
+  height: auto !important;
+  padding: initial !important;
+  margin: initial !important;
+  border: initial !important;
+  background: initial !important;
+  color: initial !important;
+  font-size: initial !important;
+  line-height: initial !important;
+  text-align: initial !important;
+  cursor: pointer !important;
+}
+
+/* Ensure admin navigation works */
+.admin-page .admin-sidebar,
+.admin-page .admin-link {
+  position: static !important;
+  display: block !important;
+  width: auto !important;
+  transform: none !important;
+}
+
+/* Reset any modal or overlay changes for admin */
+.admin-page .modal,
+.admin-page .overlay,
+.admin-page .dropdown {
+  position: absolute !important;
+  z-index: auto !important;
+  transform: none !important;
+  width: auto !important;
+  height: auto !important;
+}

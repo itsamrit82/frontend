@@ -1,0 +1,264 @@
+/* 🌟 Aellè Admin Dashboard Panel */
+
+.admin-section {
+  padding: 48px 32px;
+  max-width: 1440px;
+  margin: auto;
+  font-family: 'Poppins', sans-serif;
+}
+
+.admin-section h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 30px;
+  letter-spacing: -0.4px;
+}
+
+/* 📊 Stats Grid */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.stat-card {
+  background: white;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  border-left: 5px solid #e0e0e0;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
+}
+
+.stat-card h3 {
+  font-size: 13px;
+  font-weight: 600;
+  color: #6c757d;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  letter-spacing: 0.5px;
+}
+
+.stat-number {
+  font-size: 28px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.stat-number.pending { color: #f59e0b; }
+.stat-number.completed { color: #10b981; }
+.stat-number.revenue { color: #a3476b; }
+
+/* 🧠 Filters */
+
+.admin-filters {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 32px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.status-filter {
+  padding: 10px 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.status-filter:focus {
+  outline: none;
+  border-color: #a3476b;
+  box-shadow: 0 0 0 3px rgba(163, 71, 107, 0.15);
+}
+
+.status-filter:hover {
+  background: #fdf2f8;
+  color: #a3476b;
+}
+
+/* 📦 Orders Table */
+
+.orders-table-container {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.orders-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.orders-table th {
+  background: #f9fafb;
+  padding: 16px;
+  text-align: left;
+  font-weight: 600;
+  color: #374151;
+  font-size: 14px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.orders-table td {
+  padding: 16px;
+  border-bottom: 1px solid #f3f4f6;
+  font-size: 14px;
+  color: #333;
+  vertical-align: top;
+}
+
+.orders-table tr:hover {
+  background: #fef4fa;
+  transition: background 0.25s ease;
+}
+
+.order-number {
+  font-weight: 600;
+  color: #1f2937;
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+}
+
+.customer-info strong {
+  color: #111827;
+  font-size: 14px;
+}
+
+.customer-info small {
+  color: #6b7280;
+  font-size: 12px;
+}
+
+.item-preview {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.item-preview img {
+  width: 34px;
+  height: 34px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #eee;
+}
+
+.item-preview span {
+  font-size: 13px;
+  color: #333;
+}
+
+.amount {
+  font-weight: 600;
+  color: #059669;
+  font-size: 15px;
+}
+
+/* 🏷️ Status & Badges */
+
+.status-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: white;
+  transition: transform 0.2s ease;
+}
+
+.status-badge:hover {
+  transform: scale(1.05);
+}
+
+.status-select {
+  padding: 8px 14px;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 13px;
+  background: white;
+  cursor: pointer;
+}
+
+/* ⏭️ Pagination */
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-top: 32px;
+  padding: 24px 0;
+}
+
+.pagination button {
+  padding: 10px 16px;
+  border: 1px solid #d1d5db;
+  background: white;
+  color: #333;
+  border-radius: 10px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.25s ease;
+}
+
+.pagination button:hover:not(:disabled) {
+  background: #f3f4f6;
+}
+
+.pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  color: #6b7280;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+/* 🔄 Empty or Loading State */
+
+.loading-spinner,
+.no-orders {
+  text-align: center;
+  padding: 60px 24px;
+  font-size: 16px;
+  color: #6b7280;
+  opacity: 0.9;
+}
+
+/* 📱 Mobile Responsive */
+
+@media (max-width: 768px) {
+  .admin-section {
+    padding: 24px 16px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .orders-table-container {
+    overflow-x: auto;
+  }
+
+  .orders-table {
+    min-width: 800px;
+  }
+}

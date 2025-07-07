@@ -1,0 +1,98 @@
+.admin-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  font-family: 'Poppins', sans-serif;
+}
+
+.admin-body {
+  display: flex;
+  flex: 1;
+  margin-top: 64px; /* offset for fixed header */
+  background: #f7f8fc;
+}
+
+.admin-sidebar {
+  width: 280px;
+  background: white;
+  border-right: 1px solid #eee;
+  padding: 28px 20px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 4px 0 14px rgba(0, 0, 0, 0.03);
+  position: sticky;
+  top: 64px;
+  height: calc(100vh - 64px);
+  z-index: 999;
+}
+
+.profile-section {
+  text-align: center;
+  margin-bottom: 40px;
+  animation: fadeIn 0.4s ease;
+}
+
+.profile-section .avatar {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  margin-bottom: 12px;
+  object-fit: cover;
+  box-shadow: 0 0 0 3px #f4f4f4;
+}
+
+.profile-section h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #2c2f3f;
+}
+
+.profile-section p {
+  font-size: 13px;
+  color: #888;
+  margin-top: 4px;
+  word-break: break-all;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  animation: fadeIn 0.6s ease;
+}
+
+.sidebar-nav a {
+  text-decoration: none;
+  color: #444;
+  font-size: 15px;
+  padding: 12px 18px;
+  border-radius: 8px;
+  transition: all 0.25s ease;
+  font-weight: 500;
+}
+
+.sidebar-nav a:hover {
+  background-color: #f0e3eb;
+  color: #a3476b;
+  transform: translateX(4px);
+}
+
+.sidebar-nav a.active {
+  background-color: #a3476b;
+  color: white;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.admin-content {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}

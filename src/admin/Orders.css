@@ -1,0 +1,68 @@
+.orders-page {
+  padding: 32px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.orders-page h2 {
+  font-size: 28px;
+  margin-bottom: 24px;
+  font-family: 'Playfair Display', serif;
+  color: #2c2f3f;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  font-size: 14px;
+}
+
+thead {
+  background: #f9f9fb;
+}
+
+th, td {
+  padding: 16px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+
+tr:hover {
+  background: #fef4fa;
+}
+
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  color: white;
+  text-transform: capitalize;
+  font-weight: 500;
+}
+
+.status-badge.pending {
+  background: #999;
+}
+.status-badge.confirmed {
+  background: #3498db;
+}
+.status-badge.processing {
+  background: #8e44ad;
+}
+.status-badge.shipped {
+  background: #e67e22;
+}
+.status-badge.delivered {
+  background: #2ecc71;
+}
+.status-badge.cancelled {
+  background: #e74c3c;
+}
+
+.loading-msg {
+  font-size: 15px;
+  color: #777;
+  margin-top: 16px;
+}
