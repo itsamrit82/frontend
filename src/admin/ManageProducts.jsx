@@ -9,6 +9,7 @@ const ManageProducts = () => {
   const [editingProduct, setEditingProduct] = useState(null);
   const [form, setForm] = useState({});
   const [loading, setLoading] = useState(true);
+  const token = localStorage.getItem('adminToken');
 
   useEffect(() => {
     fetchProducts();
@@ -17,7 +18,9 @@ const ManageProducts = () => {
   const fetchProducts = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(`${API}/products`);
+      const res = await axios.get(`${API}/admin/products`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
       setProducts(res.data);
     } catch (err) {
       console.error('Fetch failed:', err);
@@ -48,14 +51,17 @@ const ManageProducts = () => {
 
   const saveProduct = async () => {
     try {
-      await axios.put(`${API}/products/${editingProduct}`, {
+      await axios.put(`${API}/admin/products/${editingProduct}`, {
         ...form,
         materials: form.materials.split(',').map(s => s.trim()),
         availableColors: form.availableColors.split(',').map(s => s.trim()),
         availableSizes: form.availableSizes.split(',').map(s => s.trim()),
         price: parseFloat(form.price),
         stock: parseInt(form.stock)
+      }, {
+        headers: { Authorization: `Bearer ${token}` }
       });
+
       setEditingProduct(null);
       fetchProducts();
     } catch (err) {

@@ -9,10 +9,9 @@
   color: white;
   font-family: 'Poppins', sans-serif;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  position: fixed;
+  position: sticky;
   top: 0;
-  left: 0;
-  z-index: 2000;
+  z-index: 999;
 }
 
 .header-left .logo {
@@ -40,7 +39,6 @@
   border-radius: 6px;
   cursor: pointer;
   transition: background 0.25s ease;
-  font-family: 'Poppins', sans-serif;
 }
 
 .logout-btn:hover {

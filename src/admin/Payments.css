@@ -59,3 +59,32 @@ tr:hover {
   color: #777;
   padding-top: 10px;
 }
+/* Payments.css */
+.payments-page {
+  padding: 32px;
+  font-family: 'Poppins', sans-serif;
+}
+.payments-page h2 {
+  font-size: 28px;
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 24px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+th, td {
+  padding: 16px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+tr:hover {
+  background-color: #fef4fa;
+}
+.paid {
+  color: #2ecc71;
+  font-weight: 600;
+}
