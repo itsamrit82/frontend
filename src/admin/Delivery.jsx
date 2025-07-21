@@ -10,11 +10,18 @@ const Delivery = () => {
   const token = localStorage.getItem('adminToken');
 
   useEffect(() => {
+    if (!token) return;
     axios.get(`${API}/orders/admin/all`, {
       headers: { Authorization: `Bearer ${token}` }
     })
-      .then(res => setOrders(res.data))
-      .catch(err => console.error('Failed to fetch delivery info:', err))
+     .then(res => {
+        const data = Array.isArray(res.data) ? res.data : [];
+        setOrders(data);
+      })
+      .catch(err => {
+        setOrders([]);
+        console.error('Failed to fetch delivery info:', err)
+      })
       .finally(() => setLoading(false));
   }, [token]);
 
@@ -31,8 +38,8 @@ const Delivery = () => {
   };
 
   return (
-    <div className="delivery-page">
-      <h2>Delivery Tracking</h2>
+    <div className="delivery-page" style={{ fontFamily: 'Poppins, sans-serif' }}>
+      <h2 style={{ fontFamily: 'Playfair Display, serif', color: '#a3476b' }}>Delivery Tracking</h2>
       {loading ? (
         <div className="loading-msg">Loading delivery data...</div>
       ) : (

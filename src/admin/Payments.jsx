@@ -10,20 +10,25 @@ const Payments = () => {
   const token = localStorage.getItem('adminToken');
 
   useEffect(() => {
+    if (!token) return;
     axios.get(`${API}/orders/admin/all`, {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(res => {
-        const paid = res.data.filter(order => order.paymentDetails.paymentStatus === 'completed');
+        const data = Array.isArray(res.data) ? res.data : [];
+        const paid = data.filter(order => order.paymentDetails && order.paymentDetails.paymentStatus === 'completed');
         setPayments(paid);
       })
-      .catch(err => console.error('Payment fetch error:', err))
+      .catch(err => {
+        setPayments([]);
+        console.error('Payment fetch error:', err)
+      })
       .finally(() => setLoading(false));
   }, [token]);
 
   return (
-    <div className="payments-page">
-      <h2>Successful Payments</h2>
+    <div className="payments-page" style={{ fontFamily: 'Poppins, sans-serif' }}>
+      <h2 style={{ fontFamily: 'Playfair Display, serif', color: '#a3476b' }}>Successful Payments</h2>
       {loading ? (
         <div className="loading-msg">Loading payments...</div>
       ) : (

@@ -1,5 +1,36 @@
 /* File: src/pages/HomePage.css */
 
+button, input, select, textarea {
+  font-family: inherit;
+  color: #222;
+  background: #fff;
+  border: 1px solid #d1d5db;
+  font-size: 1rem;
+}
+/* Ensure button text is always visible on white backgrounds */
+button[style*="background: #fff"], button[style*="background: white"], button[style*="background-color: #fff"], button[style*="background-color: white"], button.white-bg, button.bg-white {
+  color: #222 !important;
+  border: 1px solid #a3476b;
+}
+button {
+  background: #a3476b;
+  color: #fff;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+button:hover {
+  background: #913d5f;
+  color: #fff;
+}
+input[type="checkbox"], input[type="radio"] {
+  accent-color: #a3476b;
+  width: 18px;
+  height: 18px;
+  margin-right: 6px;
+}
 .home-container {
   font-family: 'Arial', sans-serif;
   overflow-x: hidden;

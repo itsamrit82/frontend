@@ -1,7 +1,7 @@
 import React from 'react';
 import './AdminHeader.css';
 
-const AdminHeader = () => {
+const AdminHeader = ({ onToggleSidebar }) => {
   const adminName = localStorage.getItem('adminName') || 'Admin';
 
   const handleLogout = () => {
@@ -12,7 +12,13 @@ const AdminHeader = () => {
   return (
     <header className="admin-header">
       <div className="header-left">
-        <img src="/aelle-logo.png" alt="The Aelle" className="logo" />
+        {/* Hamburger icon for mobile */}
+        <button className="hamburger" onClick={onToggleSidebar} aria-label="Open sidebar">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <img src="/logo.png" alt="The Aelle" className="logo" />
       </div>
       <div className="header-right">
         <span className="welcome-text">

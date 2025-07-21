@@ -1,6 +1,11 @@
 .manage-products-page {
   padding: 32px;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Poppins', Arial, Helvetica, sans-serif !important;
+  color: #222 !important;
+}
+
+.manage-products-page *, .edit-modal, .edit-modal * {
+  font-family: 'Poppins', Arial, Helvetica, sans-serif !important;
 }
 
 .manage-products-page h2 {
@@ -80,10 +85,41 @@ th, td {
 }
 
 .modal-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
   margin-bottom: 24px;
+}
+
+.edit-modal {
+  width: 92%;
+  max-width: 450px;
+  max-height: 90vh;
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: popUp 0.3s ease;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+  color: #222 !important;
+}
+
+.modal-scroll-area {
+  overflow-y: auto;
+  max-height: 60vh;
+  padding-right: 8px;
+}
+
+.form-group.preview img {
+  max-width: 100%;
+  max-height: 180px;
+  border-radius: 8px;
+  margin-top: 6px;
+  object-fit: contain;
+  background: #fafafa;
+  border: 1px solid #eee;
 }
 
 .form-group {
@@ -98,18 +134,31 @@ label {
   font-weight: 500;
 }
 
-input, textarea {
+input, textarea, select {
   padding: 10px 12px;
   border-radius: 8px;
   border: 1px solid #ccc;
   font-size: 14px;
-  background: #fafafa;
-  font-family: 'Poppins', sans-serif;
+  background: #fff !important;
+  color: #222 !important;
+  font-family: 'Poppins', Arial, Helvetica, sans-serif !important;
+  caret-color: #222 !important;
 }
 
-input:focus, textarea:focus {
+label, .edit-modal label {
+  color: #222 !important;
+  font-family: 'Poppins', Arial, Helvetica, sans-serif !important;
+}
+
+button, .edit-modal button {
+  font-family: 'Poppins', Arial, Helvetica, sans-serif !important;
+}
+
+input:focus, textarea:focus, select:focus {
   border-color: #a3476b;
   outline: none;
+  background: #fff !important;
+  color: #222 !important;
 }
 
 textarea {

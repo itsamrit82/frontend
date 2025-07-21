@@ -10,20 +10,25 @@ const Returns = () => {
   const token = localStorage.getItem('adminToken');
 
   useEffect(() => {
+    if (!token) return;
     axios.get(`${API}/orders/admin/all`, {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(res => {
-        const cancelled = res.data.filter(order => order.orderStatus === 'cancelled');
+        const data = Array.isArray(res.data) ? res.data : [];
+        const cancelled = data.filter(order => order.orderStatus === 'cancelled');
         setReturns(cancelled);
       })
-      .catch(err => console.error('Failed to load returns:', err))
+      .catch(err => {
+        setReturns([]);
+        console.error('Failed to load returns:', err)
+      })
       .finally(() => setLoading(false));
   }, [token]);
 
   return (
-    <div className="returns-page">
-      <h2>Returns / Cancelled Orders</h2>
+    <div className="returns-page" style={{ fontFamily: 'Poppins, sans-serif' }}>
+      <h2 style={{ fontFamily: 'Playfair Display, serif', color: '#a3476b' }}>Returns / Cancelled Orders</h2>
       {loading ? (
         <div className="loading-msg">Loading returned orders...</div>
       ) : returns.length === 0 ? (

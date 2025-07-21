@@ -29,8 +29,9 @@ const OrdersPage = () => {
   };
 
   useEffect(() => {
+    if (!token) return;
     fetchOrders();
-  }, []);
+  }, [token]);
 
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString('en-IN', {
@@ -186,7 +187,6 @@ const OrdersPage = () => {
                 >
                   {selectedOrder === order._id ? 'Hide Details' : 'View Details'}
                 </button>
-                
                 <button 
                   onClick={() => handleGenerateInvoice(order._id)}
                   className="invoice-btn"
@@ -194,7 +194,14 @@ const OrdersPage = () => {
                 >
                   {invoiceLoading === order._id ? 'Sending...' : '📧 Email Invoice'}
                 </button>
-                
+                <button
+                  className="track-btn"
+                  onClick={() => window.open(`https://www.delhivery.com/track/package/${order.trackingId || ''}`, '_blank')}
+                  disabled={!order.trackingId}
+                  title={order.trackingId ? 'Track with Delhivery' : 'Tracking not available'}
+                >
+                  🚚 Track Order
+                </button>
                 {order.orderStatus === 'delivered' && (
                   <button className="reorder-btn">
                     🔄 Reorder

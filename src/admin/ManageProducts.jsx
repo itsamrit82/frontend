@@ -1,6 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './ManageProducts.css';
+function Toast({ message, onClose }) {
+  if (!message) return null;
+  return (
+    <div style={{
+      position: 'fixed', bottom: 32, right: 32, zIndex: 9999, background: '#333', color: '#fff', padding: '16px 28px', borderRadius: 12, fontSize: 16, boxShadow: '0 4px 16px rgba(0,0,0,0.15)' }}>
+      {message}
+      <button style={{ marginLeft: 16, background: 'none', border: 'none', color: '#fff', fontWeight: 700, cursor: 'pointer' }} onClick={onClose}>×</button>
+    </div>
+  );
+}
 
 const API = process.env.REACT_APP_API_URL;
 
@@ -9,11 +19,13 @@ const ManageProducts = () => {
   const [editingProduct, setEditingProduct] = useState(null);
   const [form, setForm] = useState({});
   const [loading, setLoading] = useState(true);
+  const [toast, setToast] = useState('');
   const token = localStorage.getItem('adminToken');
 
   useEffect(() => {
+    if (!token) return;
     fetchProducts();
-  }, []);
+  }, [token]);
 
   const fetchProducts = async () => {
     setLoading(true);
@@ -63,8 +75,10 @@ const ManageProducts = () => {
       });
 
       setEditingProduct(null);
+      setToast('✅ Product saved');
       fetchProducts();
     } catch (err) {
+      setToast('❌ Failed to save product');
       console.error('Save failed:', err);
     }
   };
@@ -103,8 +117,8 @@ const ManageProducts = () => {
 
       {editingProduct && (
         <div className="edit-modal-overlay">
-          <div className="edit-modal">
-            <h3>Edit Product</h3>
+          <div className="edit-modal" style={{ fontFamily: 'Poppins, sans-serif', minWidth: 320 }}>
+            <h3 style={{ fontFamily: 'Playfair Display, serif', fontWeight: 700, color: '#a3476b' }}>Edit Product</h3>
             <div className="modal-scroll-area">
               <div className="modal-grid">
                 <div className="form-group">
@@ -129,7 +143,7 @@ const ManageProducts = () => {
                 </div>
                 <div className="form-group preview">
                   <label>Preview</label>
-                  <img src={form.imageUrl} alt="preview" />
+                  <img src={form.imageUrl} alt="preview" style={{ border: '1px solid #eee', borderRadius: 8, maxHeight: 80 }} />
                 </div>
                 <div className="form-group full">
                   <label>Description</label>
@@ -156,6 +170,7 @@ const ManageProducts = () => {
           </div>
         </div>
       )}
+    <Toast message={toast} onClose={() => setToast('')} />
     </div>
   );
 };

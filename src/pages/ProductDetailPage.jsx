@@ -26,6 +26,7 @@ const ProductDetailPage = () => {
   const [similar, setSimilar] = useState([]);
   const [activeTab, setActiveTab] = useState('description');
   const [zoomStyle, setZoomStyle] = useState({});
+  const [reviewMessage, setReviewMessage] = useState("");
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -132,12 +133,19 @@ const ProductDetailPage = () => {
       alert("Login required to submit feedback");
       return;
     }
-    await api.post(`/feedback/${id}`, { comment, rating });
-    setComment("");
-    setRating(5);
-    setShowModal(false);
-    const res = await api.get(`/feedback/${id}`);
-    setFeedbacks(res.data);
+    try {
+      await api.post(`/feedback/${id}`, { comment, rating });
+      setComment("");
+      setRating(5);
+      setShowModal(false);
+      setReviewMessage("Review submitted!");
+      const res = await api.get(`/feedback/${id}`);
+      setFeedbacks(res.data);
+      setTimeout(() => setReviewMessage(""), 3000);
+    } catch (err) {
+      setReviewMessage("Failed to submit review. Try again.");
+      setTimeout(() => setReviewMessage(""), 3000);
+    }
   };
 
   if (!product) {
@@ -197,14 +205,15 @@ const ProductDetailPage = () => {
               <h1>{product.title}</h1>
               <button 
                 className={`wishlist-heart ${isWishlisted ? 'active' : ''}`}
-                onClick={handleWishlist}
+                onClick={e => { e.stopPropagation(); handleWishlist(); }}
+                title={isWishlisted ? 'Remove from Wishlist' : 'Add to Wishlist'}
               >
                 {isWishlisted ? '♥' : '♡'}
               </button>
             </div>
             <div className="price-row">
-              <span className="current-price">₹{Math.round(product.price)}</span>
-              <span className="original-price">₹{Math.round(product.price * 1.2)}</span>
+              <span className="current-price">₹{typeof product.price === 'number' ? product.price : Number(product.price)}</span>
+              <span className="original-price">₹{typeof product.price === 'number' ? (product.price * 1.2).toFixed(0) : Number(product.price * 1.2).toFixed(0)}</span>
               <span className="discount">17% OFF</span>
             </div>
             <div className="rating-row">
@@ -336,6 +345,9 @@ const ProductDetailPage = () => {
                   <button className="write-review-btn" onClick={() => setShowModal(true)}>
                     Write a Review
                   </button>
+                  {reviewMessage && (
+                    <div style={{ color: '#059669', marginBottom: '1rem', fontWeight: 600, fontFamily: 'Playfair Display, serif' }}>{reviewMessage}</div>
+                  )}
                   {Array.isArray(feedbacks) && feedbacks.length > 0 ? (
                     <div className="reviews-list">
                       {feedbacks.map((feedback, index) => (
@@ -356,40 +368,7 @@ const ProductDetailPage = () => {
             </div>
           </div>
 
-          <div className="feedback-section">
-            <div className="feedback-header">
-              <div className="star-rating">
-                {[1, 2, 3, 4, 5].map((s) => (
-                  <span
-                    key={s}
-                    className={`star ${s <= rating ? "filled" : ""}`}
-                    onClick={() => setRating(s)}
-                  >
-                    ★
-                  </span>
-                ))}
-              </div>
-              <button className="feedback-btn" onClick={() => setShowModal(true)}>
-                Leave Review
-              </button>
-            </div>
-
-            {Array.isArray(feedbacks) && feedbacks.length > 0 && (
-              <div className="feedback-list">
-                {feedbacks.map((feedback, index) => (
-                  <div key={index} className="feedback-item">
-                    <div className="feedback-stars">
-                      {'★'.repeat(feedback.rating)}
-                    </div>
-                    <div className="feedback-comment">{feedback.comment}</div>
-                    <div className="feedback-author">
-                      — {feedback.user?.name || "Anonymous"}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
+          {/* Removed feedback-section with Leave Review button as requested */}
         </div>
       </div>
 

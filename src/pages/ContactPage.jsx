@@ -55,7 +55,7 @@ function ContactPage() {
             <div className="contact-icon">📍</div>
             <div className="contact-details">
               <h3>Address</h3>
-              <p>Ambala Cantt., Haryana 133001</p>
+              <p>CHANDIGARH, INDIA</p>
             </div>
           </div>
         </div>

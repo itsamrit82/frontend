@@ -2,6 +2,17 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './AddProduct.css';
 
+function Toast({ message, onClose }) {
+  if (!message) return null;
+  return (
+    <div style={{
+      position: 'fixed', bottom: 32, right: 32, zIndex: 9999, background: '#333', color: '#fff', padding: '16px 28px', borderRadius: 12, fontSize: 16, boxShadow: '0 4px 16px rgba(0,0,0,0.15)' }}>
+      {message}
+      <button style={{ marginLeft: 16, background: 'none', border: 'none', color: '#fff', fontWeight: 700, cursor: 'pointer' }} onClick={onClose}>×</button>
+    </div>
+  );
+}
+
 const API = process.env.REACT_APP_API_URL;
 
 const AddProduct = () => {
@@ -18,7 +29,7 @@ const AddProduct = () => {
   });
 
   const [loading, setLoading] = useState(false);
-  const [msg, setMsg] = useState('');
+  const [toast, setToast] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,7 +39,7 @@ const AddProduct = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setMsg('');
+    setToast('');
 
     try {
       const payload = {
@@ -41,22 +52,22 @@ const AddProduct = () => {
       };
 
       await axios.post(`${API}/products`, payload);
-      setMsg('✅ Product added successfully');
+      setToast('✅ Product added successfully');
       setForm({
         title: '', description: '', price: '', category: '',
         imageUrl: '', materials: '', availableColors: '', availableSizes: '', stock: 10
       });
     } catch (err) {
       console.error('Add product failed:', err);
-      setMsg('❌ Failed to add product');
+      setToast('❌ Failed to add product');
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="add-product-page">
-      <h2>Add New Product</h2>
+    <div className="add-product-page" style={{ fontFamily: 'Poppins, sans-serif' }}>
+      <h2 style={{ fontFamily: 'Playfair Display, serif', color: '#a3476b' }}>Add New Product</h2>
       <form className="add-product-form" onSubmit={handleSubmit}>
         <div className="form-group full-width">
           <label>Title</label>
@@ -82,7 +93,13 @@ const AddProduct = () => {
         <div className="form-row">
           <div className="form-group">
             <label>Category</label>
-            <input name="category" value={form.category} onChange={handleChange} required />
+            <select name="category" value={form.category} onChange={handleChange} required>
+              <option value="">Select Category</option>
+              <option value="party">Partywear</option>
+              <option value="casuals">Casuals</option>
+              <option value="everyday">Everyday Looks</option>
+              <option value="accessories">Accessories</option>
+            </select>
           </div>
           <div className="form-group">
             <label>Image URL</label>
@@ -108,8 +125,8 @@ const AddProduct = () => {
         <button type="submit" disabled={loading}>
           {loading ? 'Saving...' : 'Add Product'}
         </button>
-        {msg && <p className="status-msg">{msg}</p>}
-      </form>
+        </form>
+      <Toast message={toast} onClose={() => setToast('')} />
     </div>
   );
 };

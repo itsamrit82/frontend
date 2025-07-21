@@ -179,3 +179,34 @@
   text-align: center;
   margin-top: 0.5rem;
 }
+/* Button, Checkbox, Radio, and Input Styles for ProductCard */
+button, .cart-btn, .wishlist-btn {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #111827;
+}
+input, select, textarea {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #111827;
+  background: #fff;
+  border: 1px solid #d1d5db;
+}
+input[type="checkbox"], input[type="radio"] {
+  accent-color: #a3476b;
+  width: 18px;
+  height: 18px;
+  margin-right: 6px;
+}
+button, .cart-btn, .wishlist-btn {
+  background: #f7cfdc;
+  color: #1a1a1a;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+button:hover, .cart-btn:hover, .wishlist-btn:hover {
+  background: #f0cdd4;
+  color: #a3476b;
+}

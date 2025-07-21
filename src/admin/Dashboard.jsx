@@ -14,6 +14,7 @@ const Dashboard = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (!adminToken) return;
     if (adminToken === '') return; // Wait for context to sync
     if (!isAdminLoggedIn) return navigate('/login');
 
@@ -45,14 +46,57 @@ const Dashboard = () => {
   return (
     <div className="dashboard-page">
       <h2>Dashboard</h2>
-      {loading ? <p>Loading...</p> : (
-        <div className="dashboard-cards">
-          <div className="card">Users: {users.length}</div>
-          <div className="card">Products: {stats.products}</div>
-          <div className="card">Inventory: {stats.inventory}</div>
-          <div className="card">Orders: {stats.orders}</div>
-          <div className="card">Revenue: ₹{stats.revenue.toLocaleString()}</div>
-        </div>
+      {loading ? <p className="loading-msg">Loading...</p> : (
+        <>
+          <div className="dashboard-cards">
+            <div className="dashboard-card" style={{ borderLeft: '6px solid #a3476b' }}>
+              <div className="card-icon" role="img" aria-label="Users">👥</div>
+              <div className="card-info">
+                <div className="card-label">Users</div>
+                <div className="card-value">{users.length}</div>
+              </div>
+            </div>
+            <div className="dashboard-card" style={{ borderLeft: '6px solid #4caf50' }}>
+              <div className="card-icon" role="img" aria-label="Products">🛍️</div>
+              <div className="card-info">
+                <div className="card-label">Products</div>
+                <div className="card-value">{stats.products}</div>
+              </div>
+            </div>
+            <div className="dashboard-card" style={{ borderLeft: '6px solid #2196f3' }}>
+              <div className="card-icon" role="img" aria-label="Inventory">📦</div>
+              <div className="card-info">
+                <div className="card-label">Inventory</div>
+                <div className="card-value">{stats.inventory}</div>
+              </div>
+            </div>
+            <div className="dashboard-card" style={{ borderLeft: '6px solid #ff9800' }}>
+              <div className="card-icon" role="img" aria-label="Orders">📑</div>
+              <div className="card-info">
+                <div className="card-label">Orders</div>
+                <div className="card-value">{stats.orders}</div>
+              </div>
+            </div>
+            <div className="dashboard-card" style={{ borderLeft: '6px solid #e74c3c' }}>
+              <div className="card-icon" role="img" aria-label="Revenue">💰</div>
+              <div className="card-info">
+                <div className="card-label">Revenue</div>
+                <div className="card-value">₹{stats.revenue.toLocaleString()}</div>
+              </div>
+            </div>
+          </div>
+          <div className="user-list">
+            <h4>Recent Customers</h4>
+            <ul>
+              {users.slice(0, 8).map((u, idx) => (
+                <li key={idx}>
+                  <span role="img" aria-label="User">👤</span> {u?.name || u?.email || 'N/A'}
+                  {u?.city && <span style={{ color: '#888', marginLeft: 8 }}>({u.city})</span>}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </>
       )}
     </div>
   );

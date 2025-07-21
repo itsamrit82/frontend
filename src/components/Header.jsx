@@ -26,9 +26,10 @@ const Header = () => {
     return () => document.removeEventListener('mousedown', closeSearchOnClickOutside);
   }, []);
 
+  // Only close search on route change
   useEffect(() => {
     setShowSearch(false);
-    setShowMobileMenu(false);
+    // setShowMobileMenu(false); // Do not auto-close mobile menu on route change
   }, [location.pathname]);
 
   const handleSearch = (e) => {
@@ -53,7 +54,7 @@ const Header = () => {
       {/* Mobile Menu Button */}
       <button
         className="mobile-menu-btn"
-        onClick={() => setShowMobileMenu(true)}
+        onClick={() => setShowMobileMenu(v => !v)}
         aria-label="Open menu"
       >
         <svg viewBox="0 0 24 24" stroke="currentColor">
@@ -64,7 +65,7 @@ const Header = () => {
       </button>
 
       {/* Logo */}
-      <div className="header-left" onClick={() => navigate('/')}>
+      <div className="header-left" style={{ cursor: 'pointer', zIndex: 1100 }} onClick={() => { navigate('/'); setShowMobileMenu(false); }}>
         <img src="/logo.png" alt="The Aellè" className="header-logo" />
       </div>
 

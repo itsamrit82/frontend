@@ -12,6 +12,18 @@
 
 .admin-sidebar {
   width: 270px;
+  position: sticky;
+  top: 80px;
+  left: 0;
+  align-self: flex-start;
+  max-height: calc(100vh - 80px);
+  overflow-y: auto;
+  background: #fff0f3;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px #a3476b11;
+  margin-right: 32px;
+  padding: 18px 0 18px 0;
+  z-index: 900;
   background: white;
   border-right: 1px solid #eee;
   padding: 24px;

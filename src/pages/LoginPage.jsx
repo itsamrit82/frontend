@@ -28,7 +28,8 @@ const LoginPage = () => {
     setError('');
 
     try {
-      const response = await fetch(`${API_URL}/admin/login`, {
+      // Try admin login first
+      let response = await fetch(`${API_URL}/admin/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -36,21 +37,42 @@ const LoginPage = () => {
         body: JSON.stringify(form),
       });
 
-      const data = await response.json();
+      let data = await response.json();
       console.log('Login response:', data);
 
-    if (response.ok && data.token && (data.user || data.admin)) {
-  login(data);
+      if (response.ok && data.token && (data.user || data.admin)) {
+        login(data);
 
-  const role = data?.user?.role || data?.admin?.role;
+        // Wait for context state to update before navigating
+        setTimeout(() => {
+          const role = data?.user?.role || data?.admin?.role || 'user';
+          if (role === 'admin') {
+            navigate('/admin/dashboard', { replace: true });
+          } else {
+            navigate('/user/dashboard', { replace: true });
+          }
+        }, 100);
+        return;
+      }
 
-  if (role === 'admin') {
-    navigate('/admin/dashboard');
-  } else {
-    navigate('/user/dashboard');
-  }
-}
- else {
+      // If not admin, try user login
+      response = await fetch(`${API_URL}/auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(form),
+      });
+
+      data = await response.json();
+      console.log('User login response:', data);
+
+      if (response.ok && data.token && data.user) {
+        login(data);
+        setTimeout(() => {
+          navigate('/user/dashboard', { replace: true });
+        }, 100);
+      } else {
         setError(data.error || 'Login failed');
       }
     } catch (err) {

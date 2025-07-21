@@ -9,11 +9,8 @@ export const WishlistProvider = ({ children }) => {
 
   // Fetch wishlist when user logs in
   useEffect(() => {
-    if (user && token) {
-      fetchWishlist();
-    } else {
-      setWishlist([]);
-    }
+    if (!token || !user) return;
+    fetchWishlist();
   }, [user, token]);
 
   const fetchWishlist = async () => {
